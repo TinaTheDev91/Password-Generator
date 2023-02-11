@@ -1,73 +1,6 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
-
-function generatePassword() {
-  // console.log("button click")
-  // 1. Ask user for pw criteria
-  var lengthChoice = window.prompt("Please choose a password length. It must be a number from 8 to 128.");
-  var upperCase = window.prompt("Would you like to include uppercase letters? Please type 'YES' or 'NO'");
-  var lowerCase = window.prompt("Would you like to include lowercase letters? Please type 'YES' or 'NO'");
-  var specialCharacters = window.prompt("Would you like to include special characters? Please type 'YES' or 'NO'");
-  var numbers = window.prompt("Would you like to include numbers? Please type 'YES' or 'NO'");
-  // If user doesn't follow the length criteria or opts out
-  if ((lengthChoice >= 8) && (lengthChoice <= 128)) {
-      upperCase;
-      } else {
-        return;}
-
-  if ((upperCase == YES) || (upperCase == NO) || (upperCase == yes) || (upperCase == no)) {
-    function upperCaseString () {
-      var upperAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-      return upperAlphabet[Math.floor(Math.random() * lengthChoice.length)];
-    }} else {
-        return;}
-
-  if ((lowerCase == YES) || (lowerCase == NO) || (lowerCase == yes) || (lowerCase == no)) {
-    function lowerCaseString () {
-      var lowerAlphabet = "abcdefghijklmnopqrstuvwxyz";
-      return lowerAlphabet[Math.floor(Math.random() * lengthChoice.length)];
-    }} else {
-        return;}
-       
-  if ((specialCharacters == YES) || (specialCharacters == NO) || (specialCharacters == yes) || (specialCharacters == no)) {
-    function specialCharacterString () {
-      var specialString = "!$%&'()*+,-./:;<=>?@[^_`{|}~";
-      return specialString [Math.floor(Math.random() * lengthChoice.length)];
-    }} else {
-        return;}
-  
-  if ((numbers == YES) || (numbers == NO) || (numbers == yes) || (numbers == no)) {
-    function numberString () {
-      var numberString = "0123456789";
-      return numberString [Math.floor(Math.random() * lengthChoice.length)];
-    }} else {
-        return;}
- }
-
-
-//   for (let i = 0; i = lengthChoice.length; i++) {
-//     lowerCaseString()+upperCaseString()+specialCharacterString()+numberString();
-//   }
-
-  
-
-//   // else if (length < 8) && (length < 128) {
-
-//   // }
-//   // } 
-//   //  a between 8 and 128 characters
-//   //  b. upper, lower, special, numbers?
-//   // 2. Validate input
-//   // 3. Generate pw
-
-
-
-//   // 4. Display pw
-
-//   return "Generated Password"
-// }
-// Write password to the #password input
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
@@ -76,8 +9,65 @@ function writePassword() {
 
 }
 
-// Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+
+function generatePassword() {
+  // questions for user
+  var lengthChoice = prompt("Please choose a password length. It must be a number from 8 to 128.");
+  while ((lengthChoice < 8) || (lengthChoice > 128) || (isNaN(lengthChoice)=== true)) {
+      alert("Character length must be a number from 8 to 128");
+      lengthChoice = prompt("Please choose a password length. It must be a number from 8 to 128.")
+      } 
+  var upperCase = confirm("Would you like to include uppercase letters?");
+  var lowerCase = confirm("Would you like to include lowercase letters?");
+  var specialCharacters = confirm("Would you like to include special characters?");
+  var numbers = confirm("Would you like to include numbers?");
+
+// variables to hold character choices
+var upperAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+var lowerAlphabet = "abcdefghijklmnopqrstuvwxyz";
+var specialString = "!$%&'()*+,-./:;<=>?@[^_`{|}~";
+var numberString = "0123456789";
+var charBank = ""
+var userPassword = ""
+
+// if statements to hold character info
+  if (upperCase === true) {
+    charBank = charBank.concat(upperAlphabet)
+  }
+
+  if (lowerCase === true) {
+    charBank = charBank.concat(lowerAlphabet)
+  }
+
+  if (specialCharacters === true) {
+    charBank = charBank.concat(specialString)
+  }
+
+  if (numbers === true) {
+    charBank = charBank.concat(numberString)
+  }
+
+  // function that will randomize bank
+  function randomizer(max) {
+    return[Math.floor(Math.random()*max)]
+  }
+
+  // loop over character bank and return to user
+  for (var i = 0; i < lengthChoice; i++) {
+    userPassword = userPassword.concat(charBank.charAt(randomizer(charBank.length-1)))
+  }
+  return userPassword;
+
+ }
+
+
+//   return "Generated Password"
+// }
+// Write password to the #password input
+
+// Add event listener to generate button
+
 
 
 // make generatePassword function
