@@ -3,19 +3,21 @@ var generateBtn = document.querySelector("#generate");
 
 function writePassword() {
   var password = generatePassword();
+  // Write password to the #password input
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
 
 }
 
+// Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 
 function generatePassword() {
   // questions for user
   var lengthChoice = prompt("Please choose a password length. It must be a number from 8 to 128.");
-  while ((lengthChoice < 8) || (lengthChoice > 128) || (isNaN(lengthChoice)=== true)) {
-      alert("Character length must be a number from 8 to 128");
+  while ((lengthChoice < 8) || (lengthChoice > 128) || (isNaN(lengthChoice) === true)) {
+      alert("Character length must be a number from 8 to 128.");
       lengthChoice = prompt("Please choose a password length. It must be a number from 8 to 128.")
       } 
   var upperCase = confirm("Would you like to include uppercase letters?");
@@ -60,14 +62,3 @@ var userPassword = ""
   return userPassword;
 
  }
-
-
-//   return "Generated Password"
-// }
-// Write password to the #password input
-
-// Add event listener to generate button
-
-
-
-// make generatePassword function
